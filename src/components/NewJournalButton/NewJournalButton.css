@@ -1,0 +1,18 @@
+.journal-add {
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.white-plus-svg {
+  width: 20px;
+  height: 20px;
+}
