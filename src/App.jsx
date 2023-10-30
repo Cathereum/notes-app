@@ -11,11 +11,13 @@ import MainPannel from "./layouts/MainPannel/MainPannel";
 
 const INITIAL_DATA = [
   {
+    id: 1,
     title: "Подготовка проекта",
     text: "Составление бэклога и формирование задач на спринт",
     date: new Date(),
   },
   {
+    id: 2,
     title: "Поход в горы",
     text: "Заказ инвентаря, составление маршрута",
     date: new Date(),
@@ -29,11 +31,20 @@ function App() {
     setData((prevData) => [
       ...prevData,
       {
+        id: Date.now(),
         title: formProps.title,
         text: formProps.text,
-        data: new Date(formProps.date),
+        date: new Date(formProps.date),
       },
     ]);
+  };
+
+  const sortElement = (a, b) => {
+    if (a.date > b.date) {
+      return -1;
+    } else {
+      return 1;
+    }
   };
 
   return (
@@ -42,8 +53,8 @@ function App() {
         <Header />
         <NewJournalButton />
         <JournalList>
-          {data.map((el) => (
-            <CardButton>
+          {data.sort(sortElement).map((el) => (
+            <CardButton key={el.id}>
               <JournalItem title={el.title} text={el.text} date={el.date} />
             </CardButton>
           ))}
