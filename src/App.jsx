@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Header from "./components/Header/Header";
 import JournalForm from "./components/JournalForm/JournalForm";
@@ -7,23 +7,19 @@ import NewJournalButton from "./components/NewJournalButton/NewJournalButton";
 import LeftPannel from "./layouts/LeftPannel/LeftPannel";
 import MainPannel from "./layouts/MainPannel/MainPannel";
 
-const INITIAL_DATA = [
-  // {
-  //   id: 1,
-  //   title: "Подготовка проекта",
-  //   text: "Составление бэклога и формирование задач на спринт",
-  //   date: new Date(),
-  // },
-  // {
-  //   id: 2,
-  //   title: "Поход в горы",
-  //   text: "Заказ инвентаря, составление маршрута",
-  //   date: new Date(),
-  // },
-];
-
 function App() {
-  const [data, setData] = useState(INITIAL_DATA);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const lsData = JSON.parse(localStorage.getItem("data"));
+    setData(lsData.map((item) => ({ ...item, date: new Date(item.date) })));
+  }, []);
+
+  useEffect(() => {
+    if (data.length) {
+      localStorage.setItem("data", JSON.stringify(data));
+    }
+  }, [data]);
 
   const addFormData = (formProps) => {
     setData((prevData) => [
