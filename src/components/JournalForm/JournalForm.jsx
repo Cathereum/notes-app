@@ -1,5 +1,5 @@
 import Button from "../Button/Button";
-import "./JournalForm.css";
+import styles from "./JournalForm.module.css";
 
 function JournalForm({ onSubmit }) {
   const addJournalItem = (e) => {
@@ -10,7 +10,11 @@ function JournalForm({ onSubmit }) {
   };
 
   return (
-    <form className="journal-form" action="submit" onSubmit={addJournalItem}>
+    <form
+      className={styles["journal-form"]}
+      action="submit"
+      onSubmit={addJournalItem}
+    >
       <input type="text" name="title" />
       <input type="date" name="date" />
       <input type="text" name="tag" />

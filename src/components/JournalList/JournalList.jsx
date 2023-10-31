@@ -1,6 +1,6 @@
 import CardButton from "../CardButton/CardButton";
 import JournalItem from "../JournalItem/JournalItem";
-import "./JournalList.css";
+import styles from "../JournalList/JournalList.module.css";
 
 function JournalList({ items }) {
   const sortElement = (a, b) => {
@@ -12,7 +12,7 @@ function JournalList({ items }) {
   };
 
   return (
-    <div className="journal-list">
+    <div className={styles["journal-list"]}>
       {items.length === 0 && <p>записей пока нет</p>}
       {items.length > 0 &&
         items.sort(sortElement).map((el) => (

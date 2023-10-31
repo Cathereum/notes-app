@@ -1,7 +1,7 @@
-import "./MainPannel.css";
+import styles from "./MainPannel.module.css";
 
 function MainPannel({ children }) {
-  return <div className="main-pannel">{children}</div>;
+  return <div className={styles["main-pannel"]}>{children}</div>;
 }
 
 export default MainPannel;
