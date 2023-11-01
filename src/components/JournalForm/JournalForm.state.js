@@ -14,7 +14,11 @@ export function formReducer(state, action) {
       return { ...state, values: { ...state.values, ...action.payload } };
 
     case "CLEAR":
-      return { ...state, values: INITIAL_STATE.values };
+      return {
+        ...state,
+        values: INITIAL_STATE.values,
+        isFormReadyToSubmit: false,
+      };
 
     case "SUBMIT": {
       const titleValidity = state.values.title?.trim().length;

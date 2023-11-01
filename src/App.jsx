@@ -21,14 +21,14 @@ function App() {
     }
   }, [data]);
 
-  const addFormData = (formProps) => {
+  const addFormData = (formValues) => {
     setData((prevData) => [
       ...prevData,
       {
         id: Date.now(),
-        title: formProps.title,
-        text: formProps.text,
-        date: new Date(formProps.date),
+        title: formValues.title,
+        text: formValues.text,
+        date: new Date(formValues.date),
       },
     ]);
   };
