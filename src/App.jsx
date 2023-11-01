@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import "./App.css";
 import Header from "./components/Header/Header";
 import JournalForm from "./components/JournalForm/JournalForm";
@@ -6,24 +5,21 @@ import JournalList from "./components/JournalList/JournalList";
 import NewJournalButton from "./components/NewJournalButton/NewJournalButton";
 import LeftPannel from "./layouts/LeftPannel/LeftPannel";
 import MainPannel from "./layouts/MainPannel/MainPannel";
+import { useLocalStorage } from "./hooks/use-localstorage.hook";
+
+const mapData = (data) => {
+  if (!data) {
+    return [];
+  }
+  return data.map((items) => ({ ...items, date: new Date(items.date) }));
+};
 
 function App() {
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    const lsData = JSON.parse(localStorage.getItem("data"));
-    setData(lsData.map((item) => ({ ...item, date: new Date(item.date) })));
-  }, []);
-
-  useEffect(() => {
-    if (data.length) {
-      localStorage.setItem("data", JSON.stringify(data));
-    }
-  }, [data]);
+  const [data, setData] = useLocalStorage([]);
 
   const addFormData = (formValues) => {
-    setData((prevData) => [
-      ...prevData,
+    setData([
+      ...mapData(data),
       {
         id: Date.now(),
         title: formValues.title,
@@ -38,7 +34,7 @@ function App() {
       <LeftPannel>
         <Header />
         <NewJournalButton />
-        <JournalList items={data} />
+        <JournalList items={mapData(data)} />
       </LeftPannel>
       <MainPannel>
         <JournalForm onSubmit={addFormData} />
