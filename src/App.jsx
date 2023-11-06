@@ -22,9 +22,8 @@ function App() {
     setData([
       ...mapData(data),
       {
+        ...formValues,
         id: Date.now(),
-        title: formValues.title,
-        text: formValues.text,
         date: new Date(formValues.date),
       },
     ]);
