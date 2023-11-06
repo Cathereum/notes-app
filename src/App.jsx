@@ -6,6 +6,8 @@ import NewJournalButton from "./components/NewJournalButton/NewJournalButton";
 import LeftPannel from "./layouts/LeftPannel/LeftPannel";
 import MainPannel from "./layouts/MainPannel/MainPannel";
 import { useLocalStorage } from "./hooks/use-localstorage.hook";
+import { UserContext } from "./context/user.context";
+import { useState } from "react";
 
 const mapData = (data) => {
   if (!data) {
@@ -16,6 +18,7 @@ const mapData = (data) => {
 
 function App() {
   const [data, setData] = useLocalStorage([]);
+  const [userId, setUserId] = useState(1);
 
   const addFormData = (formValues) => {
     setData([
@@ -30,16 +33,18 @@ function App() {
   };
 
   return (
-    <div className="app">
-      <LeftPannel>
-        <Header />
-        <NewJournalButton />
-        <JournalList items={mapData(data)} />
-      </LeftPannel>
-      <MainPannel>
-        <JournalForm onSubmit={addFormData} />
-      </MainPannel>
-    </div>
+    <UserContext.Provider value={{ userId, setUserId }}>
+      <div className="app">
+        <LeftPannel>
+          <Header />
+          <NewJournalButton />
+          <JournalList items={mapData(data)} />
+        </LeftPannel>
+        <MainPannel>
+          <JournalForm onSubmit={addFormData} />
+        </MainPannel>
+      </div>
+    </UserContext.Provider>
   );
 }
 

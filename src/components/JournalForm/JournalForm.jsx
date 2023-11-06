@@ -1,11 +1,13 @@
-import { useEffect, useReducer } from "react";
+import { useContext, useEffect, useReducer } from "react";
 import Button from "../Button/Button";
 import styles from "./JournalForm.module.css";
 import { INITIAL_STATE, formReducer } from "./JournalForm.state";
+import { UserContext } from "../../context/user.context";
 
 function JournalForm({ onSubmit }) {
   const [formState, dispatchForm] = useReducer(formReducer, INITIAL_STATE);
   const { isFormReadyToSubmit, values } = formState;
+  const { userId } = useContext(UserContext);
 
   useEffect(() => {
     if (isFormReadyToSubmit) {
@@ -32,6 +34,7 @@ function JournalForm({ onSubmit }) {
       action="submit"
       onSubmit={addJournalItem}
     >
+      <span>Пользователь {userId}</span>
       <div className={styles["form-title-wrapper"]}>
         <input
           type="text"
