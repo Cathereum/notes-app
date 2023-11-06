@@ -28,6 +28,7 @@ function App() {
       },
     ]);
   };
+  console.log("Рендер APP");
 
   return (
     <UserContextProvider>

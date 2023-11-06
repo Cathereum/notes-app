@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Button from "../Button/Button";
 import SelectUser from "../SelectUser/SelectUser";
-import styles from "./Header.module.css";
+import Logo from "../Logo/Logo";
 
 const logo = ["/logo.svg", "/vite.svg"];
 
@@ -12,14 +12,10 @@ function Header() {
     setLogoIndex((prev) => Number(!prev));
   };
 
-  console.log(logoIndex);
+  console.log("Рендер Header");
   return (
     <>
-      <img
-        className={styles.logo}
-        src={logo[logoIndex]}
-        alt="Логотип журнала"
-      />
+      <Logo logoImage={logo[logoIndex]} />
       <SelectUser />
       <Button onClick={toggleLogo} text="Сменить Лого" />
     </>
