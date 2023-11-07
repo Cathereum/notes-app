@@ -41,7 +41,10 @@ function App() {
       );
     }
   };
-  console.log("Рендер APP");
+
+  const deleteItem = (id) => {
+    setData([...data.filter((i) => i.id !== id)]);
+  };
 
   return (
     <UserContextProvider>
@@ -52,7 +55,11 @@ function App() {
           <JournalList items={mapData(data)} setItem={setSelectedItem} />
         </LeftPannel>
         <MainPannel>
-          <JournalForm onSubmit={addFormData} selectedItemData={selectedItem} />
+          <JournalForm
+            onSubmit={addFormData}
+            onDelete={deleteItem}
+            selectedItemData={selectedItem}
+          />
         </MainPannel>
       </div>
     </UserContextProvider>

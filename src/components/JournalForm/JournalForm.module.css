@@ -72,3 +72,22 @@
 .form-button {
   max-width: 75px;
 }
+
+
+
+
+.delete-btn {
+  display: flex;
+  align-items: center;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  height: 30px;
+  width: 30px;
+}
+
+.delete-btn:hover {
+  background: rgb(93, 93, 93);
+  border-radius: 50%;
+}
