@@ -30,6 +30,7 @@ function App() {
           date: new Date(formValues.date),
         },
       ]);
+      setSelectedItem(null);
     } else {
       setData(
         [...mapData(data)].map((i) => {
@@ -39,11 +40,13 @@ function App() {
           return i;
         })
       );
+      setSelectedItem(null);
     }
   };
 
   const deleteItem = (id) => {
     setData([...data.filter((i) => i.id !== id)]);
+    setSelectedItem(null);
   };
 
   return (
