@@ -4,7 +4,7 @@ import styles from "./JournalForm.module.css";
 import { INITIAL_STATE, formReducer } from "./JournalForm.state";
 import { UserContext } from "../../context/user.context";
 
-function JournalForm({ onSubmit }) {
+function JournalForm({ onSubmit, selectedItemData }) {
   const [formState, dispatchForm] = useReducer(formReducer, INITIAL_STATE);
   const { isFormReadyToSubmit, values } = formState;
   const { userId } = useContext(UserContext);
@@ -35,6 +35,13 @@ function JournalForm({ onSubmit }) {
     });
   };
 
+  useEffect(() => {
+    dispatchForm({
+      type: "SET_VALUE",
+      payload: { ...selectedItemData },
+    });
+  }, [selectedItemData]);
+
   return (
     <form
       className={styles["journal-form"]}
@@ -58,7 +65,7 @@ function JournalForm({ onSubmit }) {
         <input
           type="date"
           onChange={onChange}
-          value={values.date}
+          value={values.date ? values.date.toISOString().slice(0, 10) : ""}
           name="date"
           id="date"
         />

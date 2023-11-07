@@ -4,7 +4,7 @@ import JournalItem from "../JournalItem/JournalItem";
 import styles from "../JournalList/JournalList.module.css";
 import { UserContext } from "../../context/user.context";
 
-function JournalList({ items }) {
+function JournalList({ items, setItem }) {
   const { userId } = useContext(UserContext);
   const sortElement = (a, b) => {
     if (a.date > b.date) {
@@ -23,7 +23,7 @@ function JournalList({ items }) {
       {items.length === 0 && <p>записей пока нет</p>}
       {items.length > 0 &&
         filteredItems.map((el) => (
-          <CardButton key={el.id}>
+          <CardButton key={el.id} onClick={() => setItem(el)}>
             <JournalItem title={el.title} text={el.text} date={el.date} />
           </CardButton>
         ))}

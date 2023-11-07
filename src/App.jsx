@@ -7,6 +7,7 @@ import LeftPannel from "./layouts/LeftPannel/LeftPannel";
 import MainPannel from "./layouts/MainPannel/MainPannel";
 import { useLocalStorage } from "./hooks/use-localstorage.hook";
 import { UserContextProvider } from "./context/user.context";
+import { useState } from "react";
 
 const mapData = (data) => {
   if (!data) {
@@ -17,6 +18,7 @@ const mapData = (data) => {
 
 function App() {
   const [data, setData] = useLocalStorage([]);
+  const [selectedItem, setSelectedItem] = useState({});
 
   const addFormData = (formValues) => {
     setData([
@@ -36,10 +38,10 @@ function App() {
         <LeftPannel>
           <Header />
           <NewJournalButton />
-          <JournalList items={mapData(data)} />
+          <JournalList items={mapData(data)} setItem={setSelectedItem} />
         </LeftPannel>
         <MainPannel>
-          <JournalForm onSubmit={addFormData} />
+          <JournalForm onSubmit={addFormData} selectedItemData={selectedItem} />
         </MainPannel>
       </div>
     </UserContextProvider>
