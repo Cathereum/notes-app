@@ -21,14 +21,25 @@ function App() {
   const [selectedItem, setSelectedItem] = useState({});
 
   const addFormData = (formValues) => {
-    setData([
-      ...mapData(data),
-      {
-        ...formValues,
-        id: Date.now(),
-        date: new Date(formValues.date),
-      },
-    ]);
+    if (!formValues.id) {
+      setData([
+        ...mapData(data),
+        {
+          ...formValues,
+          id: Date.now(),
+          date: new Date(formValues.date),
+        },
+      ]);
+    } else {
+      setData(
+        [...mapData(data)].map((i) => {
+          if (i.id === formValues.id) {
+            return { ...formValues };
+          }
+          return i;
+        })
+      );
+    }
   };
   console.log("Рендер APP");
 

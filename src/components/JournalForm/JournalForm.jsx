@@ -65,7 +65,9 @@ function JournalForm({ onSubmit, selectedItemData }) {
         <input
           type="date"
           onChange={onChange}
-          value={values.date ? values.date.toISOString().slice(0, 10) : ""}
+          value={
+            values.date ? new Date(values.date).toISOString().slice(0, 10) : ""
+          }
           name="date"
           id="date"
         />
