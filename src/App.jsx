@@ -18,7 +18,7 @@ const mapData = (data) => {
 
 function App() {
   const [data, setData] = useLocalStorage([]);
-  const [selectedItem, setSelectedItem] = useState({});
+  const [selectedItem, setSelectedItem] = useState(null);
 
   const addFormData = (formValues) => {
     if (!formValues.id) {
@@ -51,7 +51,7 @@ function App() {
       <div className="app">
         <LeftPannel>
           <Header />
-          <NewJournalButton />
+          <NewJournalButton clearFormData={() => setSelectedItem(null)} />
           <JournalList items={mapData(data)} setItem={setSelectedItem} />
         </LeftPannel>
         <MainPannel>

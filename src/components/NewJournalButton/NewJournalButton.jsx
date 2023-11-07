@@ -1,9 +1,9 @@
 import CardButton from "../CardButton/CardButton";
 import styles from "./NewJournalButton.module.css";
 
-function NewJournalButton() {
+function NewJournalButton({ clearFormData }) {
   return (
-    <CardButton className={styles["journal-add"]}>
+    <CardButton onClick={clearFormData} className={styles["journal-add"]}>
       <img
         className={styles["white-plus-svg"]}
         src="/white-plus.svg"

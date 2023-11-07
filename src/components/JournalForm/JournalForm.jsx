@@ -40,6 +40,14 @@ function JournalForm({ onSubmit, selectedItemData, onDelete }) {
   };
 
   useEffect(() => {
+    if (!selectedItemData) {
+      dispatchForm({ type: "CLEAR" });
+      dispatchForm({
+        type: "SET_VALUE",
+        payload: { userId: userId },
+      });
+    }
+
     dispatchForm({
       type: "SET_VALUE",
       payload: { ...selectedItemData },
@@ -70,7 +78,7 @@ function JournalForm({ onSubmit, selectedItemData, onDelete }) {
           name="title"
           className={styles["form-title"]}
         />
-        {selectedItemData.id && (
+        {selectedItemData?.id && (
           <button onClick={deleteJournalItem} className={styles["delete-btn"]}>
             <img src="/deleteIcon.svg" alt="deleteIcon" />
           </button>
